@@ -35,6 +35,7 @@ permissions:
 jobs:
   export-from-dev:
     runs-on: windows-latest
+    timeout-minutes: 20 # Set the timeout to 20 minutes
     env:
       RUNNER_DEBUG: 1
 
