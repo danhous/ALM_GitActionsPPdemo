@@ -1,0 +1,51 @@
+name: Verify Power Platform Actions Connection
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  verify-connection:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Print current user
+        run: whoami
+
+      - name: Print environment variables
+        run: |
+          echo "GITHUB_ACTOR: $env:GITHUB_ACTOR"
+          echo "GITHUB_REPOSITORY: $env:GITHUB_REPOSITORY"
+          echo "GITHUB_REF: $env:GITHUB_REF"
+          echo "GITHUB_SHA: $env:GITHUB_SHA"
+          echo "GITHUB_WORKSPACE: $env:GITHUB_WORKSPACE"
+          echo "GITHUB_EVENT_NAME: $env:GITHUB_EVENT_NAME"
+          echo "GITHUB_RUN_ID: $env:GITHUB_RUN_ID"
+          echo "GITHUB_RUN_NUMBER: $env:GITHUB_RUN_NUMBER"
+          echo "GITHUB_JOB: $env:GITHUB_JOB"
+          echo "GITHUB_ACTION: $env:GITHUB_ACTION"
+          echo "GITHUB_ACTIONS: $env:GITHUB_ACTIONS"
+          echo "GITHUB_ACTOR: $env:GITHUB_ACTOR"
+          echo "GITHUB_WORKFLOW: $env:GITHUB_WORKFLOW"
+          echo "GITHUB_HEAD_REF: $env:GITHUB_HEAD_REF"
+          echo "GITHUB_BASE_REF: $env:GITHUB_BASE_REF"
+          echo "GITHUB_SERVER_URL: $env:GITHUB_SERVER_URL"
+          echo "GITHUB_API_URL: $env:GITHUB_API_URL"
+          echo "GITHUB_GRAPHQL_URL: $env:GITHUB_GRAPHQL_URL"
+
+      - name: Test download action
+        run: |
+          curl -I https://api.github.com/repos/microsoft/powerplatform-actions/zipball/0c80aacb61f9bfdcb930b880febc420ec4ef2f3e
+
+      - name: Test HTTP connection
+        run: |
+          curl -I https://github.com/microsoft/powerplatform-actions-lab/blob/main/sample-workflows/export-and-branch-solution.yml
+
+      - name: Verify export-from-dev action
+        run: |
+          curl -I https://api.github.com/repos/microsoft/powerplatform-actions/zipball/0c80aacb61f9bfdcb930b880febc420ec4ef2f3e
