@@ -38,14 +38,14 @@ jobs:
           echo "GITHUB_API_URL: $env:GITHUB_API_URL"
           echo "GITHUB_GRAPHQL_URL: $env:GITHUB_GRAPHQL_URL"
 
-      - name: Test download action
+      - name: Test download action with follow redirects
         run: |
-          curl -I https://api.github.com/repos/microsoft/powerplatform-actions/zipball/0c80aacb61f9bfdcb930b880febc420ec4ef2f3e
+          curl -L -I https://api.github.com/repos/microsoft/powerplatform-actions/zipball/0c80aacb61f9bfdcb930b880febc420ec4ef2f3e
 
-      - name: Test HTTP connection
+      - name: Test HTTP connection with follow redirects
         run: |
-          curl -I https://github.com/microsoft/powerplatform-actions-lab/blob/main/sample-workflows/export-and-branch-solution.yml
+          curl -L -I https://github.com/microsoft/powerplatform-actions-lab/blob/main/sample-workflows/export-and-branch-solution.yml
 
-      - name: Verify export-from-dev action
+      - name: Verify export-from-dev action with follow redirects
         run: |
-          curl -I https://api.github.com/repos/microsoft/powerplatform-actions/zipball/0c80aacb61f9bfdcb930b880febc420ec4ef2f3e
+          curl -L -I https://api.github.com/repos/microsoft/powerplatform-actions/zipball/0c80aacb61f9bfdcb930b880febc420ec4ef2f3e
